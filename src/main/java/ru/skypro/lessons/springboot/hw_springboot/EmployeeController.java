@@ -1,12 +1,10 @@
 package ru.skypro.lessons.springboot.hw_springboot;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/employee")
+@RequestMapping("/employees")
 public class EmployeeController {
     private final EmployeeService employeeService;
 
@@ -14,13 +12,40 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
+
+    @PostMapping("/add")
+    public void addNewEmployees(@RequestBody Employee... employees) {
+        employeeService.addEmployee(employees);
+    }
+
+    @PutMapping("/{id}")
+    public void editEmployee(@PathVariable long id, @RequestBody Employee employee) {
+        employeeService.updateEmployee(id, employee);
+    }
+
+    @GetMapping("/{id}")
+    public Employee getEmployee(@PathVariable long id) {
+        return employeeService.getEmployeeById(id);
+    }
+
+    @GetMapping("/higherSalary")
+    public List<Employee> getEmployeesHigherSalary(@RequestParam (name = "salary") int salary) {
+        return employeeService.getEmployeesHigherSalary(salary);
+    }
+    @DeleteMapping("/{id}")
+    public void removeEmployeeById(@PathVariable long id) {
+        employeeService.deleteEmployee(id);
+    }
+
+
+
     @GetMapping("/max")
-    public Employee maxSalary() {
+    public List<Employee> maxSalary() {
         return employeeService.maxSalary();
     }
 
     @GetMapping("/min")
-    public Employee minSalary() {
+    public List<Employee> minSalary() {
         return employeeService.minSalary();
     }
 
