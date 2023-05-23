@@ -1,10 +1,15 @@
 package ru.skypro.lessons.springboot.hw_springboot;
 
 import lombok.SneakyThrows;
+import ru.skypro.lessons.springboot.hw_springboot.dto.EmployeeDTO;
 
 import java.util.List;
 
 public interface EmployeeService {
+
+    List<EmployeeDTO> getAllEmployees();
+
+    void addEmployee(Employee employee);
 
     void addEmployee(Employee... employees);
     void updateEmployee(long id, Employee employee);
