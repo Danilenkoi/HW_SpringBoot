@@ -1,6 +1,9 @@
 package ru.skypro.lessons.springboot.hw_springboot;
 
 import org.springframework.web.bind.annotation.*;
+import ru.skypro.lessons.springboot.hw_springboot.dto.EmployeeDTO;
+import ru.skypro.lessons.springboot.hw_springboot.dto.EmployeeOutDTO;
+
 import java.util.List;
 
 @RestController
@@ -14,22 +17,22 @@ public class EmployeeController {
 
 
     @PostMapping("/add")
-    public void addNewEmployees(@RequestBody Employee... employees) {
+    public void addNewEmployees(@RequestBody EmployeeDTO... employees) {
         employeeService.addEmployee(employees);
     }
 
     @PutMapping("/{id}")
-    public void editEmployee(@PathVariable long id, @RequestBody Employee employee) {
+    public void editEmployee(@PathVariable long id, @RequestBody EmployeeDTO employee) {
         employeeService.updateEmployee(id, employee);
     }
 
     @GetMapping("/{id}")
-    public Employee getEmployee(@PathVariable long id) {
+    public EmployeeView getEmployee(@PathVariable long id) {
         return employeeService.getEmployeeById(id);
     }
 
     @GetMapping("/higherSalary")
-    public List<Employee> getEmployeesHigherSalary(@RequestParam (name = "salary") int salary) {
+    public List<EmployeeOutDTO> getEmployeesHigherSalary(@RequestParam (name = "salary") int salary) {
         return employeeService.getEmployeesHigherSalary(salary);
     }
     @DeleteMapping("/{id}")
@@ -40,17 +43,17 @@ public class EmployeeController {
 
 
     @GetMapping("/max")
-    public List<Employee> maxSalary() {
+    public List<EmployeeOutDTO> maxSalary() {
         return employeeService.maxSalary();
     }
 
     @GetMapping("/min")
-    public List<Employee> minSalary() {
+    public List<EmployeeOutDTO> minSalary() {
         return employeeService.minSalary();
     }
 
     @GetMapping("/high")
-    public List<Employee> highSalary() {
+    public List<EmployeeOutDTO> highSalary() {
         return employeeService.highSalary();
     }
 

@@ -2,43 +2,17 @@ package ru.skypro.lessons.springboot.hw_springboot;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "position")
 public class Position{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
 
-    public Position() {
-    }
-
-    public Position(Long id, String name){
-        this.id = id;
-        this.name = name;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return "Employee { " +
-                "Name='" + name +
-                '}';
-    }
-
+    @Column(name = "position_name")
+    String positionName;
+    @OneToMany(targetEntity = Employee.class)
+    public List <Employee> employeeList;
 }

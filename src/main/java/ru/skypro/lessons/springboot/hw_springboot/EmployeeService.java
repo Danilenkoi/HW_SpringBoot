@@ -1,31 +1,29 @@
 package ru.skypro.lessons.springboot.hw_springboot;
 
-import lombok.SneakyThrows;
 import ru.skypro.lessons.springboot.hw_springboot.dto.EmployeeDTO;
-
+import ru.skypro.lessons.springboot.hw_springboot.dto.EmployeeOutDTO;
+import ru.skypro.lessons.springboot.hw_springboot.EmployeeView;
 import java.util.List;
-
 public interface EmployeeService {
+    void addEmployee(EmployeeDTO... employees);
 
-    List<EmployeeDTO> getAllEmployees();
+    void updateEmployee(long id, EmployeeDTO employee);
 
-    void addEmployee(Employee employee);
+    EmployeeView getEmployeeById(long id);
 
-    void addEmployee(Employee... employees);
-    void updateEmployee(long id, Employee employee);
-
-    @SneakyThrows
-    void updateEmployee(Long id, Employee employee);
-
-    Employee getEmployeeById(long id);
     void deleteEmployee(long id);
-    List<Employee> getEmployeesHigherSalary (int salary);
 
-    List<Employee> maxSalary();
+    List<EmployeeOutDTO> getEmployeesHigherSalary(int salary);
 
-    List<Employee> minSalary();
+    List<EmployeeOutDTO> getEmployeesWithPosition(Long positionId);
 
-    List<Employee> highSalary();
+    List<EmployeeOutDTO> getEmployeesWithPaging(int pageIndex, int unitsPerPage);
+
+    List<EmployeeOutDTO> maxSalary();
+
+    List<EmployeeOutDTO> minSalary();
+
+    List<EmployeeOutDTO> highSalary();
 
     Integer sumOfSalary();
 }

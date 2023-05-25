@@ -1,27 +1,35 @@
 package ru.skypro.lessons.springboot.hw_springboot.dto;
+
+import lombok.Data;
+import lombok.experimental.Accessors;
 import ru.skypro.lessons.springboot.hw_springboot.Employee;
+import ru.skypro.lessons.springboot.hw_springboot.Position;
 
-public class EmployeeDTO {
-
+@Data
+@Accessors(chain = true)
+public class EmployeeOutDTO {
     private Long id;
     private String name;
     private Integer salary;
+    private PositionDTO positionDTO;
 
-    public static EmployeeDTO fromEmployee(Employee employee){
-        EmployeeDTO employeeDTO = new EmployeeDTO();
-        employeeDTO.setId(employee.getId());
-        employeeDTO.setName(employee.getName());
-        employeeDTO.setSalary(employee.getSalary());
-        return employeeDTO;
+    public static EmployeeOutDTO fromEmployee(Employee employee) {
+        return new EmployeeOutDTO()
+                .setId(employee.getId())
+                .setName(employee.getName())
+                .setSalary(employee.getSalary())
+                .setPositionDTO(PositionDTO.fromPosition(employee.getPosition()));
     }
 
     public Employee toEmployee() {
         Employee employee = new Employee();
         employee.setId(this.getId());
         employee.setName(this.getName());
-        employee.setSalary(this.getSalary());
+        employee.setSalary(this.salary);
+        employee.setPosition(this.positionDTO.toPosition());
         return employee;
     }
+
 
     public Long getId() {
         return id;
@@ -46,4 +54,5 @@ public class EmployeeDTO {
     public void setSalary(int salary) {
         this.salary = salary;
     }
+
 }
