@@ -1,6 +1,7 @@
 package ru.skypro.lessons.springboot.hw_springboot;
 
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.skypro.lessons.springboot.hw_springboot.dto.EmployeeDTO;
 import ru.skypro.lessons.springboot.hw_springboot.dto.EmployeeOutDTO;
@@ -21,6 +22,13 @@ public abstract class EmployeeServiceImpl implements EmployeeService {
     @Override
     public void addEmployee(EmployeeDTO[] employees) {
         employeeRepository.saveAll(Arrays.stream(employees).map(EmployeeDTO::toEmployee).toList());
+    }
+    public List<EmployeeOutDTO> getEmployeesWithPosition(Long positionId) {
+        if (positionId == null) {
+            return fromEmployeeToDTOList(employeeRepository.findAllEmployees());
+        } else {
+            return fromEmployeeToDTOList(employeeRepository.findEmployeeByPosition_Id(positionId));
+        }
     }
     @Override
         public void updateEmployee ( long id, EmployeeDTO employee){
@@ -55,12 +63,12 @@ public abstract class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<EmployeeOutDTO> maxSalary() {
-        return fromEmployeeToDTOList(employeeRepository.MaxSalary());
+        return fromEmployeeToDTOList(employeeRepository.maxSalary());
     }
 
     @Override
     public List<EmployeeOutDTO> minSalary() {
-        return fromEmployeeToDTOList(employeeRepository.Lowestsalary());
+        return fromEmployeeToDTOList(employeeRepository.lowestSalary());
     }
 
     @Override

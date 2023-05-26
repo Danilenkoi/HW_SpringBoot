@@ -13,10 +13,10 @@ public interface EmployeeRepository extends CrudRepository<Employee, Long> {
     Optional<EmployeeView> findEmployeeView(Long id);
 
     @Query("select e from Employee e where e.salary = (select max(salary) from Employee)")
-    List<Employee> MaxSalary();
+    List<Employee> maxSalary();
 
     @Query("select e from Employee e where e.salary = (select min(salary) from Employee)")
-    List<Employee> Lowestsalary();
+    List<Employee> lowestSalary();
 
     List<Employee> findEmployeeByPosition_Id(long positionId);
 
