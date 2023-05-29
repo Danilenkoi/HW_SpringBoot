@@ -2,10 +2,12 @@ package ru.skypro.lessons.springboot.hw_springboot;
 
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Service;
 import ru.skypro.lessons.springboot.hw_springboot.dto.EmployeeDTO;
 import ru.skypro.lessons.springboot.hw_springboot.dto.EmployeeOutDTO;
 import ru.skypro.lessons.springboot.hw_springboot.repository.EmployeeRepository;
+import ru.skypro.lessons.springboot.hw_springboot.repository.PositionRepository;
 
 import java.awt.print.Pageable;
 import java.util.Arrays;
@@ -17,12 +19,19 @@ import java.util.stream.Collectors;
 public abstract class EmployeeServiceImpl implements EmployeeService {
     private final EmployeeRepository employeeRepository;
 
+    private final PositionRepository positionRepository;
     private final PagingEmployee employeePaging;
 
     @Override
     public void addEmployee(EmployeeDTO[] employees) {
-        employeeRepository.saveAll(Arrays.stream(employees).map(EmployeeDTO::toEmployee).toList());
+        for (EmployeeDTO employee : employees) {
+            Employee employeeEntity = employee.toEmployee();
+            employeeEntity.setPosition(positionRepository.findById(employee.getPositionId())
+                    .orElseThrow(() -> new IllegalArgumentException("Position not found")));
+            employeeRepository.save(employeeEntity);
+        }
     }
+
     public List<EmployeeOutDTO> getEmployeesWithPosition(Long positionId) {
         if (positionId == null) {
             return fromEmployeeToDTOList(employeeRepository.findAllEmployees());
@@ -32,12 +41,13 @@ public abstract class EmployeeServiceImpl implements EmployeeService {
     }
     @Override
         public void updateEmployee ( long id, EmployeeDTO employee){
-            employeeRepository.findById(id).orElseThrow(IdNotFound::new);
-            employeeRepository.save(employee.toEmployee().setId(id));
+        Employee employeeEntity = employee.toEmployee();
+        employeeEntity.setId(id);
+        employeeRepository.save(employeeEntity);
         }
     @Override
         public EmployeeView getEmployeeById(long id) {
-            return employeeRepository.findEmployeeView(id).orElseThrow(IdNotFound::new);
+            return employeeRepository.findEmployeeView(id).orElseThrow(EmployeeExceptionHandler::new);
         }
     @Override
     public void deleteEmployee(long id) {
@@ -46,7 +56,7 @@ public abstract class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<EmployeeOutDTO> getEmployeesWithPaging(int pageIndex, int unitsPerPage) {
-        Pageable employeesOfPage = PageRequest.of(pageIndex, unitsPerPage);
+        PageRequest employeesOfPage = PageRequest.of(pageIndex, unitsPerPage);
         return employeePaging.findAll(employeesOfPage).map(EmployeeOutDTO::fromEmployee).toList();
     }
 

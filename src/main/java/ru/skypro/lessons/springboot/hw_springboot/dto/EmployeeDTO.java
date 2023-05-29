@@ -11,10 +11,10 @@ public class EmployeeDTO {
 
     public static EmployeeDTO fromEmployee(Employee employee){
         EmployeeDTO employeeDTO = new EmployeeDTO();
-        employeeDTO.setId(employee.getId());
-        employeeDTO.setName(employee.getName());
-        employeeDTO.setSalary(employee.getSalary());
-        employeeDTO.setPositionId(employee.getPosition());
+        employee.setId(employee.getId());
+        employee.setName(employee.getName());
+        employee.setSalary(employee.getSalary());
+        employee.setPosition(employee.getPositionId());
         return employeeDTO;
     }
 
