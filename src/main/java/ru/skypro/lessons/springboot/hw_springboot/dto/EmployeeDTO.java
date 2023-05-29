@@ -1,17 +1,20 @@
 package ru.skypro.lessons.springboot.hw_springboot.dto;
 import ru.skypro.lessons.springboot.hw_springboot.Employee;
+import ru.skypro.lessons.springboot.hw_springboot.Position;
 
 public class EmployeeDTO {
 
     private Long id;
     private String name;
     private Integer salary;
+    private Long positionId;
 
     public static EmployeeDTO fromEmployee(Employee employee){
         EmployeeDTO employeeDTO = new EmployeeDTO();
         employeeDTO.setId(employee.getId());
         employeeDTO.setName(employee.getName());
         employeeDTO.setSalary(employee.getSalary());
+        employeeDTO.setPositionId(employee.getPosition());
         return employeeDTO;
     }
 
@@ -20,8 +23,10 @@ public class EmployeeDTO {
         employee.setId(this.getId());
         employee.setName(this.getName());
         employee.setSalary(this.getSalary());
+        employee.setPosition(this.positionId());
         return employee;
     }
+
 
     public Long getId() {
         return id;
@@ -45,5 +50,13 @@ public class EmployeeDTO {
 
     public void setSalary(int salary) {
         this.salary = salary;
+    }
+
+    public Long getPositionId(){
+        return positionId;
+    }
+
+    public void setPositionId() {
+        this.positionId = positionId;
     }
 }
