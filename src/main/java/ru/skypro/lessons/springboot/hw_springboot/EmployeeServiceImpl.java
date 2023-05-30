@@ -47,7 +47,8 @@ public abstract class EmployeeServiceImpl implements EmployeeService {
         }
     @Override
         public EmployeeView getEmployeeById(long id) {
-            return employeeRepository.findEmployeeView(id).orElseThrow(EmployeeExceptionHandler::new);
+        return employeeRepository.findEmployeeView(id).orElseThrow(()
+                -> new IllegalArgumentException("Employee not found"));
         }
     @Override
     public void deleteEmployee(long id) {
