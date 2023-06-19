@@ -1,10 +1,11 @@
-package ru.skypro.lessons.springboot.hw_springboot;
+package ru.skypro.lessons.springboot.hw_springboot.employee;
 
 import ru.skypro.lessons.springboot.hw_springboot.dto.EmployeeDTO;
 import ru.skypro.lessons.springboot.hw_springboot.dto.EmployeeOutDTO;
-import ru.skypro.lessons.springboot.hw_springboot.EmployeeView;
+
 import java.util.List;
 public interface EmployeeService {
+
     void addEmployee(EmployeeDTO... employees);
 
     void updateEmployee(long id, EmployeeDTO employee);
@@ -26,4 +27,5 @@ public interface EmployeeService {
     List<EmployeeOutDTO> highSalary();
 
     Integer sumOfSalary();
+
 }

@@ -2,8 +2,7 @@ package ru.skypro.lessons.springboot.hw_springboot.dto;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
-import ru.skypro.lessons.springboot.hw_springboot.Employee;
-import ru.skypro.lessons.springboot.hw_springboot.Position;
+import ru.skypro.lessons.springboot.hw_springboot.employee.Employee;
 
 @Data
 @Accessors(chain = true)

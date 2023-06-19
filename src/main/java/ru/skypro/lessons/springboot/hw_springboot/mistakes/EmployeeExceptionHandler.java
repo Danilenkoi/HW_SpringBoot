@@ -1,4 +1,4 @@
-package ru.skypro.lessons.springboot.hw_springboot;
+package ru.skypro.lessons.springboot.hw_springboot.mistakes;
 
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;

@@ -1,9 +1,6 @@
-package ru.skypro.lessons.springboot.hw_springboot;
+package ru.skypro.lessons.springboot.hw_springboot.employee;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
-import ru.skypro.lessons.springboot.hw_springboot.dto.EmployeeDTO;
-import ru.skypro.lessons.springboot.hw_springboot.repository.EmployeeRepository;
+import ru.skypro.lessons.springboot.hw_springboot.position.Position;
 
 @Entity
 @Table(name = "employee")

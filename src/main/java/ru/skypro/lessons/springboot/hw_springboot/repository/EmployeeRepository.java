@@ -1,8 +1,8 @@
 package ru.skypro.lessons.springboot.hw_springboot.repository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-import ru.skypro.lessons.springboot.hw_springboot.Employee;
-import ru.skypro.lessons.springboot.hw_springboot.EmployeeView;
+import ru.skypro.lessons.springboot.hw_springboot.employee.Employee;
+import ru.skypro.lessons.springboot.hw_springboot.employee.EmployeeView;
 
 import java.util.List;
 import java.util.Optional;

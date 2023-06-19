@@ -1,6 +1,7 @@
-package ru.skypro.lessons.springboot.hw_springboot;
+package ru.skypro.lessons.springboot.hw_springboot.position;
 
 import jakarta.persistence.*;
+import ru.skypro.lessons.springboot.hw_springboot.employee.Employee;
 
 import java.util.List;
 

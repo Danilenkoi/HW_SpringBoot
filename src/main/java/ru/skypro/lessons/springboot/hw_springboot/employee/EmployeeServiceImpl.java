@@ -1,16 +1,13 @@
-package ru.skypro.lessons.springboot.hw_springboot;
+package ru.skypro.lessons.springboot.hw_springboot.employee;
 
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Service;
 import ru.skypro.lessons.springboot.hw_springboot.dto.EmployeeDTO;
 import ru.skypro.lessons.springboot.hw_springboot.dto.EmployeeOutDTO;
 import ru.skypro.lessons.springboot.hw_springboot.repository.EmployeeRepository;
 import ru.skypro.lessons.springboot.hw_springboot.repository.PositionRepository;
 
-import java.awt.print.Pageable;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 

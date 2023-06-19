@@ -2,7 +2,7 @@ package ru.skypro.lessons.springboot.hw_springboot.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import ru.skypro.lessons.springboot.hw_springboot.Position;
+import ru.skypro.lessons.springboot.hw_springboot.position.Position;
 @Data
 @AllArgsConstructor
 public class PositionDTO {

@@ -1,6 +1,5 @@
 package ru.skypro.lessons.springboot.hw_springboot.dto;
-import ru.skypro.lessons.springboot.hw_springboot.Employee;
-import ru.skypro.lessons.springboot.hw_springboot.Position;
+import ru.skypro.lessons.springboot.hw_springboot.employee.Employee;
 
 public class EmployeeDTO {
 

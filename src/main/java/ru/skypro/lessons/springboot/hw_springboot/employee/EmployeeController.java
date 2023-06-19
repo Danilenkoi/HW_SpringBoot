@@ -1,4 +1,4 @@
-package ru.skypro.lessons.springboot.hw_springboot;
+package ru.skypro.lessons.springboot.hw_springboot.employee;
 
 import org.springframework.web.bind.annotation.*;
 import ru.skypro.lessons.springboot.hw_springboot.dto.EmployeeDTO;
@@ -9,6 +9,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/employees")
 public class EmployeeController {
+
     private final EmployeeService employeeService;
 
     public EmployeeController(EmployeeService employeeService) {
@@ -61,4 +62,5 @@ public class EmployeeController {
     public Integer sumOfSalary() {
         return employeeService.sumOfSalary();
     }
+
 }
