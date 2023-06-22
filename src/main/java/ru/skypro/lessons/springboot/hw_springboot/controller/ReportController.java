@@ -1,10 +1,11 @@
-package ru.skypro.lessons.springboot.hw_springboot.report;
+package ru.skypro.lessons.springboot.hw_springboot.controller;
 
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.skypro.lessons.springboot.hw_springboot.report.ReportService;
 
 @RestController
 @RequestMapping("/report")

@@ -1,8 +1,10 @@
-package ru.skypro.lessons.springboot.hw_springboot.employee;
+package ru.skypro.lessons.springboot.hw_springboot.controller;
 
 import org.springframework.web.bind.annotation.*;
 import ru.skypro.lessons.springboot.hw_springboot.dto.EmployeeDTO;
 import ru.skypro.lessons.springboot.hw_springboot.dto.EmployeeOutDTO;
+import ru.skypro.lessons.springboot.hw_springboot.employee.EmployeeService;
+import ru.skypro.lessons.springboot.hw_springboot.employee.EmployeeView;
 
 import java.util.List;
 

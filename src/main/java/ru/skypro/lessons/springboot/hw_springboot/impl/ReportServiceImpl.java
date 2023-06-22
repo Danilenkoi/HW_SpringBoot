@@ -1,4 +1,4 @@
-package ru.skypro.lessons.springboot.hw_springboot.report;
+package ru.skypro.lessons.springboot.hw_springboot.impl;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -8,6 +8,7 @@ import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import ru.skypro.lessons.springboot.hw_springboot.mistakes.IdNotFound;
+import ru.skypro.lessons.springboot.hw_springboot.report.*;
 
 import java.util.List;
 

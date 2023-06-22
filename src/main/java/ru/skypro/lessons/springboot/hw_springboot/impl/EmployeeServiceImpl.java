@@ -1,13 +1,18 @@
-package ru.skypro.lessons.springboot.hw_springboot.employee;
+package ru.skypro.lessons.springboot.hw_springboot.impl;
 
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.skypro.lessons.springboot.hw_springboot.dto.EmployeeDTO;
 import ru.skypro.lessons.springboot.hw_springboot.dto.EmployeeOutDTO;
+import ru.skypro.lessons.springboot.hw_springboot.employee.Employee;
+import ru.skypro.lessons.springboot.hw_springboot.employee.EmployeeService;
+import ru.skypro.lessons.springboot.hw_springboot.employee.EmployeeView;
+import ru.skypro.lessons.springboot.hw_springboot.employee.PagingEmployee;
 import ru.skypro.lessons.springboot.hw_springboot.repository.EmployeeRepository;
 import ru.skypro.lessons.springboot.hw_springboot.repository.PositionRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -87,5 +92,12 @@ public abstract class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Integer sumOfSalary() {
         return employeeRepository.getSumOfSalary();
+    }
+
+    @Override
+    public List<EmployeeOutDTO> getAll() {
+        var list = new ArrayList<EmployeeOutDTO>();
+        employeeRepository.findAll().forEach(x -> list.add(EmployeeOutDTO.fromEmployee(x)));
+        return list;
     }
 }
