@@ -1,0 +1,27 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet id="1" author="DaIl">
+        <preConditions>
+            <tableExists tableName="position"/>
+            <not>
+                <tableExists tableName="employee"/>
+            </not>
+        </preConditions>
+        <createTable tableName="employee">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="salary" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="position_id" type="BIGINT">
+                <constraints foreignKeyName="fk_employee_position" references="position(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
