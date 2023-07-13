@@ -8,6 +8,6 @@ public class HwSpringBootApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(HwSpringBootApplication.class, args);
-    }
 
+    }
 }
