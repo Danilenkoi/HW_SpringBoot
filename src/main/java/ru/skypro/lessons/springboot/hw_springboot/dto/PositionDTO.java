@@ -6,9 +6,9 @@ import ru.skypro.lessons.springboot.hw_springboot.position.Position;
 @Data
 @AllArgsConstructor
 public class PositionDTO {
+    long id;
+    String positionName;
 
-    private Long id;
-    private String positionName;
     public static PositionDTO fromPosition(Position position) {
         return position == null ? null : new PositionDTO(position.getId(), position.getPositionName());
     }

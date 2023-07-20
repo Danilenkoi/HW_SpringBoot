@@ -12,7 +12,7 @@ import ru.skypro.lessons.springboot.hw_springboot.employee.PagingEmployee;
 import ru.skypro.lessons.springboot.hw_springboot.repository.EmployeeRepository;
 import ru.skypro.lessons.springboot.hw_springboot.repository.PositionRepository;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,12 +26,7 @@ public abstract class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void addEmployee(EmployeeDTO[] employees) {
-        for (EmployeeDTO employee : employees) {
-            Employee employeeEntity = employee.toEmployee();
-            employeeEntity.setPosition(positionRepository.findById(employee.getPositionId())
-                    .orElseThrow(() -> new IllegalArgumentException("Position not found")));
-            employeeRepository.save(employeeEntity);
-        }
+        employeeRepository.saveAll(Arrays.stream(employees).map(EmployeeDTO::toEmployee).toList());
     }
 
     public List<EmployeeOutDTO> getEmployeesWithPosition(Long positionId) {
@@ -41,17 +36,20 @@ public abstract class EmployeeServiceImpl implements EmployeeService {
             return fromEmployeeToDTOList(employeeRepository.findEmployeeByPosition_Id(positionId));
         }
     }
+
     @Override
-        public void updateEmployee ( long id, EmployeeDTO employee){
+    public void updateEmployee(long id, EmployeeDTO employee) {
         Employee employeeEntity = employee.toEmployee();
         employeeEntity.setId(id);
         employeeRepository.save(employeeEntity);
-        }
+    }
+
     @Override
-        public EmployeeView getEmployeeById(long id) {
+    public EmployeeView getEmployeeById(long id) {
         return employeeRepository.findEmployeeView(id).orElseThrow(()
                 -> new IllegalArgumentException("Employee not found"));
-        }
+    }
+
     @Override
     public void deleteEmployee(long id) {
         employeeRepository.deleteById(id);
@@ -63,7 +61,8 @@ public abstract class EmployeeServiceImpl implements EmployeeService {
         return employeePaging.findAll(employeesOfPage).map(EmployeeOutDTO::fromEmployee).toList();
     }
 
-    private List<EmployeeOutDTO> fromEmployeeToDTOList(List<Employee> list) {
+    @Override
+    public List<EmployeeOutDTO> fromEmployeeToDTOList(List<Employee> list) {
         return list.stream()
                 .map(EmployeeOutDTO::fromEmployee)
                 .collect(Collectors.toList());
@@ -96,8 +95,12 @@ public abstract class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<EmployeeOutDTO> getAll() {
-        var list = new ArrayList<EmployeeOutDTO>();
-        employeeRepository.findAll().forEach(x -> list.add(EmployeeOutDTO.fromEmployee(x)));
-        return list;
+        return fromEmployeeToDTOList(employeeRepository.findAllEmployees());
+    }
+
+    private List<EmployeeOutDTO> fromEmployeeToDTOList(List<Employee> list) {
+        return list.stream()
+                .map(EmployeeOutDTO::fromEmployee)
+                .collect(Collectors.toList());
     }
 }
